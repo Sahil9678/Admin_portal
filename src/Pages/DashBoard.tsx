@@ -17,12 +17,15 @@ const DashBoard = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (event: any) => {
-        navigate('/dashboard');
-        store.dispatch({
-            type: common.userdata,
-            payload: ({ ...details, ...({ id: uuidv4() }) })
-        })
-        setDetails({ name: "", email: "", password: "", phone_number: "" })
+        if (!(error.name || error.email || error.password || error.phone_number)) {
+            navigate('/dashboard');
+            store.dispatch({
+                type: common.userdata,
+                payload: ({ ...details, ...({ id: uuidv4() }) })
+            })
+            setDetails({ name: "", email: "", password: "", phone_number: "" })
+        }
+
         event.preventDefault();
     }
 

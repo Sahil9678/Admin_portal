@@ -59,13 +59,16 @@ const Table = ({ column, rows, editable }: tableprops) => {
     }
 
     const handleSubmit = (event: any) => {
-        const findex = userdata.findIndex((elem: any) => elem.id === showrowdetail.id);
-        userdata[findex] = showrowdetail;
-        store.dispatch({
-            type: common.updateuserdata,
-            payload: userdata
-        })
-        setshowpopup(false);
+        if (!(error.name || error.email || error.password || error.phone_number)) {
+            const findex = userdata.findIndex((elem: any) => elem.id === showrowdetail.id);
+            userdata[findex] = showrowdetail;
+            store.dispatch({
+                type: common.updateuserdata,
+                payload: userdata
+            })
+            setshowpopup(false);
+        }
+
         event.preventDefault();
     }
 
