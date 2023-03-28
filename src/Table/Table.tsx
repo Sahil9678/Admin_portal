@@ -117,8 +117,11 @@ const Table = ({ column, rows, editable }: tableprops) => {
                                         <tr>
                                             {
                                                 Object.entries(rowval).map(([key, value]: any) => {
+                                                    console.log('sahil1-', key)
                                                     if (key === 'id') {
                                                         return null;
+                                                    } else if (key === 'password') {
+                                                        return <td className='hidetext'>{CellProperty(key, value)}</td>
                                                     }
                                                     return <td>{CellProperty(key, value)}</td>
                                                 })
