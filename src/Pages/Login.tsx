@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import AppBar from '../AppBar/AppBar';
 import { common } from '../Redux/constants';
 import store from '../Redux/store';
 import DashBoard from './DashBoard';
@@ -24,16 +23,20 @@ const Login = () => {
 
 
     const handleSubmit = (event: any) => {
-        navigate('/dashboard');
+        if (error.name || error.email || error.password || error.phone_number) {
+            navigate('/');
+        } else {
+            navigate('/dashboard');
 
-        store.dispatch({
-            type: common.userdata,
-            payload: ({ ...details, ...({ id: uuidv4() }) })
-        })
-        store.dispatch({
-            type: common.toggleLoginStatus,
-            payload: true
-        })
+            store.dispatch({
+                type: common.userdata,
+                payload: ({ ...details, ...({ id: uuidv4() }) })
+            })
+            store.dispatch({
+                type: common.toggleLoginStatus,
+                payload: true
+            })
+        }
         event.preventDefault();
     }
 
@@ -54,7 +57,7 @@ const Login = () => {
     return (
         <div>
             {
-                isloggedIn ? <AppBar><DashBoard /></AppBar> :
+                isloggedIn ? <DashBoard /> :
                     <>
                         <h1>Admin DashBoard Login</h1>
                         <form onSubmit={handleSubmit} className='dashboard_form'>

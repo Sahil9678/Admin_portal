@@ -7,6 +7,7 @@ import Table from '../Table/Table';
 import './DashBoard.scss';
 import { v4 as uuidv4 } from 'uuid';
 import { input_fields } from './Login';
+import AppBar from '../AppBar/AppBar';
 
 
 const DashBoard = () => {
@@ -39,65 +40,67 @@ const DashBoard = () => {
     }
 
     return (
-        <div className='dashboard_container'>
-            <form onSubmit={handleSubmit} className='dashboard_form'>
-                <label>Enter your Name:
-                    <input
-                        placeholder='Name'
-                        type="text"
-                        value={details.name}
-                        onChange={(e) => handledetails('name', e.target.value)}
-                        required
-                    />
+        <AppBar>
+            <div className='dashboard_container'>
+                <form onSubmit={handleSubmit} className='dashboard_form'>
+                    <label>Enter your Name:
+                        <input
+                            placeholder='Name'
+                            type="text"
+                            value={details.name}
+                            onChange={(e) => handledetails('name', e.target.value)}
+                            required
+                        />
+                        {
+                            error.name !== '' && <label className='form_label'>{error.name}</label>
+                        }
+                    </label>
+                    <label>Enter your Email:
+                        <input
+                            type="email"
+                            placeholder='Email'
+                            value={details.email}
+                            onChange={(e) => handledetails('email', e.target.value)}
+                            required
+                        />
+                        {
+                            error.email !== '' && <label className='form_label'>{error.email}</label>
+                        }
+                    </label>
+                    <label>Enter your Password:
+                        <input
+                            type="password"
+                            placeholder='Password'
+                            value={details.password}
+                            onChange={(e) => handledetails('password', e.target.value)}
+                            required
+                        />
+                        {
+                            error.password !== '' && <label className='form_label'>{error.password}</label>
+                        }
+                    </label>
+                    <label>Enter your Phone Number:
+                        <input
+                            type="number"
+                            placeholder='Phone Number'
+                            value={details.phone_number}
+                            maxLength={10}
+                            onChange={(e) => handledetails('phone_number', e.target.value)}
+                            required
+                        />
+                        {
+                            error.phone_number !== '' && <label className='form_label'>{error.phone_number}</label>
+                        }
+                    </label>
+                    <input type="submit" />
+                </form>
+                <div>
                     {
-                        error.name !== '' && <label className='form_label'>{error.name}</label>
+                        userdata.length > 0 && <Table column={Object.keys(userdata[0])} rows={userdata} editable={true} />
                     }
-                </label>
-                <label>Enter your Email:
-                    <input
-                        type="email"
-                        placeholder='Email'
-                        value={details.email}
-                        onChange={(e) => handledetails('email', e.target.value)}
-                        required
-                    />
-                    {
-                        error.email !== '' && <label className='form_label'>{error.email}</label>
-                    }
-                </label>
-                <label>Enter your Password:
-                    <input
-                        type="password"
-                        placeholder='Password'
-                        value={details.password}
-                        onChange={(e) => handledetails('password', e.target.value)}
-                        required
-                    />
-                    {
-                        error.password !== '' && <label className='form_label'>{error.password}</label>
-                    }
-                </label>
-                <label>Enter your Phone Number:
-                    <input
-                        type="number"
-                        placeholder='Phone Number'
-                        value={details.phone_number}
-                        maxLength={10}
-                        onChange={(e) => handledetails('phone_number', e.target.value)}
-                        required
-                    />
-                    {
-                        error.phone_number !== '' && <label className='form_label'>{error.phone_number}</label>
-                    }
-                </label>
-                <input type="submit" />
-            </form>
-            <div>
-                {
-                    userdata.length > 0 && <Table column={Object.keys(userdata[0])} rows={userdata} editable={true} />
-                }
+                </div>
             </div>
-        </div>
+        </AppBar>
     )
 }
 
