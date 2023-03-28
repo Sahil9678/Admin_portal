@@ -5,7 +5,7 @@ import Login from "../Pages/Login";
 
 function ProtectedRoute({ component }: any) {
     const isloggedIn = useSelector((state: any) => state.commonReducer.isloggedIn);
-    return isloggedIn ? <AppBar>{component}</AppBar> : <Login />
+    return isloggedIn ? <>{component} </> : <Login />
 }
 
 export default ProtectedRoute;

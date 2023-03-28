@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import './Login.scss';
 
 export const input_fields: any = {
-    name: /^[a-z\d]{5,12}$/i,
+    name: /^[a-z]([-']?[a-z]+)*( [a-z]([-']?[a-z]+)*)+$/i,
     email: /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
     password: /^[#\w@_-]{8,20}$/,
     phone_number: /^[6-9]{1}[0-9]{9}$/,
@@ -53,61 +53,63 @@ const Login = () => {
     }
     return (
         <div>
-            <h1>Admin DashBoard Login</h1>
             {
                 isloggedIn ? <AppBar><DashBoard /></AppBar> :
-                    <form onSubmit={handleSubmit} className='dashboard_form'>
-                        <label>Enter your Name:
-                            <input
-                                placeholder='Name'
-                                type="text"
-                                value={details.name}
-                                onChange={(e) => handledetails('name', e.target.value)}
-                                required
-                            />
-                            {
-                                error.name !== '' && <label className='form_label'>{error.name}</label>
-                            }
-                        </label>
-                        <label>Enter your Email:
-                            <input
-                                type="email"
-                                placeholder='Email'
-                                value={details.email}
-                                onChange={(e) => handledetails('email', e.target.value)}
-                                required
-                            />
-                            {
-                                error.email !== '' && <label className='form_label'>{error.email}</label>
-                            }
-                        </label>
-                        <label>Enter your Password:
-                            <input
-                                type="password"
-                                placeholder='Password'
-                                value={details.password}
-                                onChange={(e) => handledetails('password', e.target.value)}
-                                required
-                            />
-                            {
-                                error.password !== '' && <label className='form_label'>{error.password}</label>
-                            }
-                        </label>
-                        <label>Enter your Phone Number:
-                            <input
-                                type="number"
-                                placeholder='Phone Number'
-                                value={details.phone_number}
-                                maxLength={10}
-                                onChange={(e) => handledetails('phone_number', e.target.value)}
-                                required
-                            />
-                            {
-                                error.phone_number !== '' && <label className='form_label'>{error.phone_number}</label>
-                            }
-                        </label>
-                        <input type="submit" />
-                    </form>
+                    <>
+                        <h1>Admin DashBoard Login</h1>
+                        <form onSubmit={handleSubmit} className='dashboard_form'>
+                            <label>Enter your Name:
+                                <input
+                                    placeholder='Name'
+                                    type="text"
+                                    value={details.name}
+                                    onChange={(e) => handledetails('name', e.target.value)}
+                                    required
+                                />
+                                {
+                                    error.name !== '' && <label className='form_label'>{error.name}</label>
+                                }
+                            </label>
+                            <label>Enter your Email:
+                                <input
+                                    type="email"
+                                    placeholder='Email'
+                                    value={details.email}
+                                    onChange={(e) => handledetails('email', e.target.value)}
+                                    required
+                                />
+                                {
+                                    error.email !== '' && <label className='form_label'>{error.email}</label>
+                                }
+                            </label>
+                            <label>Enter your Password:
+                                <input
+                                    type="password"
+                                    placeholder='Password'
+                                    value={details.password}
+                                    onChange={(e) => handledetails('password', e.target.value)}
+                                    required
+                                />
+                                {
+                                    error.password !== '' && <label className='form_label'>{error.password}</label>
+                                }
+                            </label>
+                            <label>Enter your Phone Number:
+                                <input
+                                    type="number"
+                                    placeholder='Phone Number'
+                                    value={details.phone_number}
+                                    maxLength={10}
+                                    onChange={(e) => handledetails('phone_number', e.target.value)}
+                                    required
+                                />
+                                {
+                                    error.phone_number !== '' && <label className='form_label'>{error.phone_number}</label>
+                                }
+                            </label>
+                            <input type="submit" />
+                        </form>
+                    </>
             }
         </div>
     )
